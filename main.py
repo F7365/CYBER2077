@@ -4,7 +4,6 @@ import sys
 import os
 import pymysql
 
-
 all_sprites = pygame.sprite.Group()
 vertical_borders = pygame.sprite.Group()
 horizontal_borders = pygame.sprite.Group()
@@ -38,52 +37,52 @@ def load_image(name, colorkey=None):
 
 
 def generate_map():
-    map_list = ['g' * 10, 'd' * 10]#2
-    for i in range(2):#2
+    map_list = ['g' * 10, 'd' * 10]  # 2
+    for i in range(2):  # 2
         empty_string = ''
         for j in range(10):
-            empty_string+=random.choice(['d','s'])
+            empty_string += random.choice(['d', 's'])
         map_list.append(empty_string)
-    for i in range(2):#2
+    for i in range(2):  # 2
         map_list.append('s' * 10)
-    for i in range(4):#4
+    for i in range(4):  # 4
         empty_string = ''
         for j in range(10):
-            empty_string+=random.choice(['s','a','s','a','s'])
+            empty_string += random.choice(['s', 'a', 's', 'a', 's'])
         map_list.append(empty_string)
-    map_list.append('s' * 10)#1
-    for i in range(14):#14
+    map_list.append('s' * 10)  # 1
+    for i in range(14):  # 14
         empty_string = ''
         for j in range(10):
-            empty_string+=random.choice(['i','s','i','s','s','s','s'])
+            empty_string += random.choice(['i', 's', 'i', 's', 's', 's', 's'])
         map_list.append(empty_string)
-    for i in range(5):#5
+    for i in range(5):  # 5
         empty_string = ''
         for j in range(10):
-            empty_string+=random.choice(['z','b','z','b','b','b','i'])
+            empty_string += random.choice(['z', 'b', 'z', 'b', 'b', 'b', 'i'])
         map_list.append(empty_string)
-    for i in range(2):#2
+    for i in range(2):  # 2
         map_list.append('b' * 10)
-    for i in range(4):#4
+    for i in range(4):  # 4
         empty_string = ''
         for j in range(10):
-            empty_string+=random.choice(['l','b','l','b','b','n','r','b','b'])
+            empty_string += random.choice(['l', 'b', 'l', 'b', 'b', 'n', 'r', 'b', 'b'])
         map_list.append(empty_string)
-    for i in range(2):#2
+    for i in range(2):  # 2
         map_list.append('b' * 10)
-    for i in range(4):#4
+    for i in range(4):  # 4
         empty_string = ''
         for j in range(10):
-            empty_string+=random.choice(['e','b','e','b','n','b','r','r','b'])
+            empty_string += random.choice(['e', 'b', 'e', 'b', 'n', 'b', 'r', 'r', 'b'])
         map_list.append(empty_string)
-    for i in range(3):#3
+    for i in range(3):  # 3
         map_list.append('b' * 10)
-    for i in range(4):#4
+    for i in range(4):  # 4
         empty_string = ''
         for j in range(10):
-            empty_string+=random.choice(['w','b','b','b','b','b','n'])
+            empty_string += random.choice(['w', 'b', 'b', 'b', 'b', 'b', 'n'])
         map_list.append(empty_string)
-    map_list.append('b' * 10)#1
+    map_list.append('b' * 10)  # 1
     return map_list
 
 
@@ -92,9 +91,9 @@ def start_screen():
     fon = pygame.transform.scale(load_image('start_fone.png'), (1000, 700))
     screen.blit(fon, (0, 0))
     lines = {"Cyberminer 2077": (500, 200, 140),
-             "Click to Play": (500, 260, 50), 
-             "New Game": (500, 420, 60), 
-             "Load Game": (500, 520, 60) }
+             "Click to Play": (500, 260, 50),
+             "New Game": (500, 420, 60),
+             "Load Game": (500, 520, 60)}
     red = 255
     clock = pygame.time.Clock()
     fontl = pygame.font.Font(None, 100)
@@ -102,7 +101,7 @@ def start_screen():
     str_loading_rect = str_loading.get_rect()
     str_loading_rect.centerx = 500
     str_loading_rect.centery = 620
-    to_return=False
+    to_return = False
     while True:
         if to_return:
             return
@@ -111,16 +110,16 @@ def start_screen():
                 pygame.quit()
                 sys.exit()
             elif event.type == pygame.MOUSEBUTTONDOWN:
-                if 370<event.pos[0]<630 and 380<event.pos[1]<460: # New
+                if 370 < event.pos[0] < 630 and 380 < event.pos[1] < 460:  # New
                     screen.blit(str_loading, str_loading_rect)
-                    to_return=True
-                    load=False
-                if 370<event.pos[0]<630 and 480<event.pos[1]<560: # Load
+                    to_return = True
+                    load = False
+                if 370 < event.pos[0] < 630 and 480 < event.pos[1] < 560:  # Load
                     screen.blit(str_loading, str_loading_rect)
-                    to_return=True
-                    load=True
-        pygame.draw.rect(screen, (0, 0, 0), (370,380,260,80))
-        pygame.draw.rect(screen, (0, 0, 0), (370,480,260,80))
+                    to_return = True
+                    load = True
+        pygame.draw.rect(screen, (0, 0, 0), (370, 380, 260, 80))
+        pygame.draw.rect(screen, (0, 0, 0), (370, 480, 260, 80))
         for line in lines:
             font = pygame.font.Font(None, lines[line][2])
             string_rendered = font.render(line, 1, (red, 0, 0))
@@ -128,7 +127,7 @@ def start_screen():
             intro_rect.centerx = lines[line][0]
             intro_rect.centery = lines[line][1]
             screen.blit(string_rendered, intro_rect)
-        
+
         if red <= 5:
             a = 2
         if red >= 250:
@@ -152,33 +151,33 @@ def create_particles(position, material):
 
 def score_table(score_now, inventory):
     score_dict = {
-            'g': 10,
-            'd': 10,
-            's': 20,
-            'b': 60,
-            'a': 40,
-            'i': 80,
-            'z': 200,
-            'l': 500,
-            'e': 450,
-            'r': 400,
-            'w': 1000,
-            'n': 50
-        }
+        'g': 10,
+        'd': 10,
+        's': 20,
+        'b': 60,
+        'a': 40,
+        'i': 80,
+        'z': 200,
+        'l': 500,
+        'e': 450,
+        'r': 400,
+        'w': 1000,
+        'n': 50
+    }
     score = score_now
     for i in inventory:
-        score+=(inventory[i]*score_dict[i])
+        score += (inventory[i] * score_dict[i])
     return score
 
 
-def save_to_db(power,coef,capacity,cover,score,map,levels):
+def save_to_db(power, coef, capacity, cover, score, map, levels):
     DB_HOST = 'ildarg0a.beget.tech'
     DB_USER = 'ildarg0a_guala'
     DB_PASSWORD = 'QWERasdf0192'
     DB_NAME = 'ildarg0a_guala'
     conn = pymysql.connect(
-            host=DB_HOST, port=3306, user=DB_USER, password=DB_PASSWORD, db=DB_NAME
-        )
+        host=DB_HOST, port=3306, user=DB_USER, password=DB_PASSWORD, db=DB_NAME
+    )
     with conn.cursor() as cur:
         try:
             sql = f"""SELECT `user` FROM miner2077"""
@@ -200,8 +199,8 @@ def load_from_db():
     DB_PASSWORD = 'QWERasdf0192'
     DB_NAME = 'ildarg0a_guala'
     conn = pymysql.connect(
-            host=DB_HOST, port=3306, user=DB_USER, password=DB_PASSWORD, db=DB_NAME
-        )
+        host=DB_HOST, port=3306, user=DB_USER, password=DB_PASSWORD, db=DB_NAME
+    )
     with conn.cursor() as cur:
         try:
             sql = f"""SELECT `user` FROM miner2077"""
@@ -249,11 +248,11 @@ class Tile(pygame.sprite.Sprite):
             'n': 7200
         }
         self.destruction = 0
-        self.material=tile_type
-        self.xc=pos_x
-        self.yc=pos_y
+        self.material = tile_type
+        self.xc = pos_x
+        self.yc = pos_y
         self.strength = stength_dict[tile_type]
-        self.image=pygame.transform.scale(tile_images[tile_type], (tile_width, tile_width))
+        self.image = pygame.transform.scale(tile_images[tile_type], (tile_width, tile_width))
         self.rect = self.image.get_rect().move(
             tile_width * pos_x, tile_width * pos_y + 400)
 
@@ -275,7 +274,7 @@ class Miner(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__(player_group, all_sprites)
         self.score = 0
-        self.inventory={}
+        self.inventory = {}
         self.coef = 1
         self.power = 1
         self.capacity = 5
@@ -284,18 +283,19 @@ class Miner(pygame.sprite.Sprite):
         self.downimage = pygame.transform.rotate(self.leftimage, 90)
         self.image = self.leftimage
         self.rect = self.image.get_rect().move(460, 330)
-    
+
     def add_tile(self, material):
         if material in self.inventory:
-            self.inventory[material]+=1
+            self.inventory[material] += 1
         else:
-            self.inventory[material]=1
+            self.inventory[material] = 1
 
     def update(self):
         if pygame.sprite.spritecollideany(miner, sell_point) and len(self.inventory) != 0:
             self.score = score_table(self.score, self.inventory)
             self.inventory = {}
-            save_to_db(self.power,self.coef,self.capacity,COVER,self.score,list(map(lambda x: (x.material, x.xc, x.yc),map_group)),list(map(lambda x: x.level ,ShopList)))
+            save_to_db(self.power, self.coef, self.capacity, COVER, self.score,
+                       list(map(lambda x: (x.material, x.xc, x.yc), map_group)), list(map(lambda x: x.level, ShopList)))
         score_font = pygame.font.Font(None, 50)
         str_score = score_font.render(f'Points: {self.score}$', 1, (255, 255, 255))
         str_score_rect = str_score.get_rect()
@@ -364,7 +364,7 @@ class Particle(pygame.sprite.Sprite):
         super().__init__(particles_group)
         self.fire = []
         for scale in (5, 8, 11):
-            if material=='d' or material=='g':
+            if material == 'd' or material == 'g':
                 self.fire.append(pygame.transform.scale(load_image("dirt.png"), (scale, scale)))
             else:
                 self.fire.append(pygame.transform.scale(load_image("stone.png"), (scale, scale)))
@@ -384,9 +384,9 @@ class Particle(pygame.sprite.Sprite):
 
 class Shop:
     def __init__(self, x, image_file, mode):
-        prices = {0:[250,500,900,1550,2000,0],
-        1:[200,400,700,1500,2000,0],
-        2:[200,450,800,1600,2000,0]}
+        prices = {0: [250, 500, 900, 1550, 2000, 0],
+                  1: [200, 400, 700, 1500, 2000, 0],
+                  2: [200, 450, 800, 1600, 2000, 0]}
         self.x = x
         self.level = 0
         self.prices = prices[mode]
@@ -394,12 +394,13 @@ class Shop:
         self.mode = mode
 
     def clicked(self, pos, target):
-        data = {0:[1,3,5,7,9,11],
-        1:[5,8,11,14,17,20],
-        2:[1,1.2,1.4,1.6,1.8,2]}
-        if self.x+3<pos[0]<self.x+147 and 8<pos[1]<52 and self.level!=5 and target.score - self.prices[self.level] >=0:
+        data = {0: [1, 3, 5, 7, 9, 11],
+                1: [5, 8, 11, 14, 17, 20],
+                2: [1, 1.2, 1.4, 1.6, 1.8, 2]}
+        if self.x + 3 < pos[0] < self.x + 147 and 8 < pos[1] < 52 and self.level != 5 and target.score - self.prices[
+            self.level] >= 0:
             target.score = target.score - self.prices[self.level]
-            self.level+=1
+            self.level += 1
             if self.mode == 0:
                 target.power = data[0][self.level]
             elif self.mode == 1:
@@ -408,22 +409,22 @@ class Shop:
                 target.coef = data[2][self.level]
 
     def update(self):
-        level_color = {0:(200,200,200),
-                1:(0,200,0),
-                2:(0,200,230),
-                3:(175,30,255),
-                4:(220,0,0),
-                5:(240,240,0)}
+        level_color = {0: (200, 200, 200),
+                       1: (0, 200, 0),
+                       2: (0, 200, 230),
+                       3: (175, 30, 255),
+                       4: (220, 0, 0),
+                       5: (240, 240, 0)}
         pygame.draw.rect(screen, level_color[self.level], (self.x, 5, 150, 50))
-        pygame.draw.rect(screen, (0,0,0), (self.x, 5, 150, 50), 3)
+        pygame.draw.rect(screen, (0, 0, 0), (self.x, 5, 150, 50), 3)
         if self.prices[self.level] != 0:
             cost_font = pygame.font.Font(None, 40)
             str_cost = cost_font.render(f'{self.prices[self.level]}$', 1, (0, 0, 0))
             str_cost_rect = str_cost.get_rect()
-            str_cost_rect.centerx = self.x+90
+            str_cost_rect.centerx = self.x + 90
             str_cost_rect.centery = 30
             screen.blit(str_cost, str_cost_rect)
-        screen.blit(self.icon, (self.x+5, 10))
+        screen.blit(self.icon, (self.x + 5, 10))
 
 
 if __name__ == '__main__':
@@ -443,14 +444,14 @@ if __name__ == '__main__':
     Border(465, 323, 535, 333)
     ShopList = []
     for d in range(3):
-        image_cats = {0:'mine_cat.png',
-        1:'box_cat.png',
-        2:'speed_cat.png'}
-        ShopList.append(Shop(d*180+(d+1)*50, image_cats[d], d))
-    
+        image_cats = {0: 'mine_cat.png',
+                      1: 'box_cat.png',
+                      2: 'speed_cat.png'}
+        ShopList.append(Shop(d * 180 + (d + 1) * 50, image_cats[d], d))
+
     running = True
     clock = pygame.time.Clock()
-    if not load:    
+    if not load:
         COVER = map_group.sprites()[0].rect.y
 
     if load:
@@ -463,10 +464,12 @@ if __name__ == '__main__':
             miner.score = data_db[4]
             for tile_data in str(data_db[5]).lstrip('[').rstrip(']').split('), '):
                 tile_data_f = tile_data.lstrip('(').rstrip(')').split(', ')
-                Tile(tile_data_f[0].strip("'"),int(tile_data_f[1]),int(tile_data_f[2]))
+                Tile(tile_data_f[0].strip("'"), int(tile_data_f[1]), int(tile_data_f[2]))
             for i in range(3):
-                ShopList[i].level=int(data_db[6][3*i+1])
-
+                ShopList[i].level = int(data_db[6][3 * i + 1])
+        else:
+            render_map(generate_map())
+            COVER = map_group.sprites()[0].rect.y
 
     while running:
         for event in pygame.event.get():
@@ -482,11 +485,11 @@ if __name__ == '__main__':
             miner.image = miner.leftimage
             if not pygame.sprite.spritecollideany(miner, vertical_borders) and not pygame.sprite.spritecollideany(miner,
                                                                                                                   map_group):
-                miner.rect = miner.rect.move(-4*miner.coef, 0)
+                miner.rect = miner.rect.move(-4 * miner.coef, 0)
             for border in vertical_borders:
                 if pygame.sprite.collide_rect(miner, border):
                     if border.rect.centerx > miner.rect.centerx:
-                        miner.rect = miner.rect.move(-4*miner.coef, 0)
+                        miner.rect = miner.rect.move(-4 * miner.coef, 0)
                         state = True
                         break
                     else:
@@ -498,24 +501,25 @@ if __name__ == '__main__':
                             continue
                         if abs(block.rect.y - miner.rect.y) < 50:
                             if miner.rect.x - block.rect.x >= 80:
-                                if sum(miner.inventory.values())<miner.capacity:
+                                if sum(miner.inventory.values()) < miner.capacity:
                                     block.animate(miner)
                                 break
                             else:
-                                miner.rect = miner.rect.move(-4*miner.coef, 0)
+                                miner.rect = miner.rect.move(-4 * miner.coef, 0)
                                 break
                         else:
-                            miner.rect = miner.rect.move(-4*miner.coef, 0)
+                            miner.rect = miner.rect.move(-4 * miner.coef, 0)
                             break
         if keys[pygame.K_d]:
             state = True
             miner.image = miner.rightimage
-            if not pygame.sprite.spritecollideany(miner, vertical_borders) and not pygame.sprite.spritecollideany(miner, map_group):
-                miner.rect = miner.rect.move(4*miner.coef, 0)
+            if not pygame.sprite.spritecollideany(miner, vertical_borders) and not pygame.sprite.spritecollideany(miner,
+                                                                                                                  map_group):
+                miner.rect = miner.rect.move(4 * miner.coef, 0)
             for border in vertical_borders:
                 if pygame.sprite.collide_rect(miner, border):
                     if border.rect.centerx < miner.rect.centerx:
-                        miner.rect = miner.rect.move(4*miner.coef, 0)
+                        miner.rect = miner.rect.move(4 * miner.coef, 0)
                         state = True
                         break
                     else:
@@ -527,29 +531,29 @@ if __name__ == '__main__':
                             continue
                         if abs(block.rect.y - miner.rect.y) < 61:
                             if block.rect.x - miner.rect.x <= 80 and block.rect.x - miner.rect.x >= 0:
-                                if sum(miner.inventory.values())<miner.capacity:
+                                if sum(miner.inventory.values()) < miner.capacity:
                                     block.animate(miner)
                                 break
                             else:
-                                miner.rect = miner.rect.move(4*miner.coef, 0)
+                                miner.rect = miner.rect.move(4 * miner.coef, 0)
                                 break
                         else:
-                            miner.rect = miner.rect.move(4*miner.coef, 0)
+                            miner.rect = miner.rect.move(4 * miner.coef, 0)
                             break
         if keys[pygame.K_s]:
-            state=True
+            state = True
             miner.image = miner.downimage
             for block in map_group:
                 if pygame.sprite.collide_rect(miner, block) and block.rect.centery >= miner.rect.centery:
-                    state=False
+                    state = False
                     if miner.rect.centerx - block.rect.x <= 100:
-                        if sum(miner.inventory.values())<miner.capacity:
+                        if sum(miner.inventory.values()) < miner.capacity:
                             block.animate(miner)
                         break
                     else:
                         continue
             if state and not pygame.sprite.spritecollideany(miner, horizontal_borders):
-                miner.rect=miner.rect.move(0,4*miner.coef)
+                miner.rect = miner.rect.move(0, 4 * miner.coef)
         if keys[pygame.K_w]:
             state = True
             miner.image = miner.leftimage
@@ -565,16 +569,16 @@ if __name__ == '__main__':
             if state:
                 miner.v = 0
                 miner.dv = 0
-                miner.rect = miner.rect.move(0, -2*miner.coef)
+                miner.rect = miner.rect.move(0, -2 * miner.coef)
         if not keys[pygame.K_s] and not keys[pygame.K_a] and not keys[pygame.K_d]:
             miner.image = miner.leftimage
             cracks_group.empty()
             for block in map_group:
                 block.destruction = 0
-        
+
         camera.update(miner)
         background.update()
-        COVER+=350-miner.rect.centery
+        COVER += 350 - miner.rect.centery
         for sprite in all_sprites:
             camera.apply(sprite)
         for sprite in cracks_group:
